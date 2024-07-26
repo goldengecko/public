@@ -4,6 +4,8 @@
 CREATE TYPE painting_style AS ENUM ('Realist', 'Impressionist', 'Abstract', 'Expressionist', 'Surrealist', 'Romantic', 'Minimalist');
 CREATE TYPE brush_style AS ENUM ('Detailed', 'Expressive', 'Palette Knife');
 CREATE TYPE commission_type AS ENUM ('Duplicate', 'Variation', 'Custom');
+CREATE TYPE frame_type AS ENUM ('Unframed', 'Floating', 'Traditional');
+
 -- Migration 2: Create pictures table
 CREATE TABLE pictures (
   id BIGSERIAL PRIMARY KEY,
@@ -22,7 +24,7 @@ CREATE TABLE pictures (
   brush_styles brush_style[] NOT NULL,
   painted_date TIMESTAMP NOT NULL,
   available BOOLEAN NOT NULL DEFAULT false,
-  framed BOOLEAN NOT NULL,
+  frame frame_type NOT NULL,
   color_data BYTEA NOT NULL,
   in_stock BOOLEAN NOT NULL DEFAULT true,
   commissionable BOOLEAN NOT NULL,
